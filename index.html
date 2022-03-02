@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,22 +9,35 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Mini Quiz</title>
 </head>
+
 <body>
-<!-- created divs to separate between starting point, the actual game and when the game ends -->
+    <!-- created divs to separate between starting point, the actual game and when the game ends -->
     <h1>Are you smarter than a Web Developer?</h1>
 
-    <div id="quiz"> </div>
-<!-- added a start button to start the game -->
+    <!-- added a start button to start the game -->
+    <div id="start">
     <h2>Click to start</h2>
     <button id="begin">Start</button>
-<!-- added a submit button to submit the quiz when finished -->
-    <button id="submit">Submit Quiz</button>
-    
-    <div id="results"></div>
+    </div>
 
-    
+    <!-- added a div to have the game loaded in -->
+    <div id="game">
+        <h2>Game</h2>
+        <div id="questions"></div>
 
-<!-- linked the javascript to the html so when you pull up the website it gives you the features i have put in JS -->
+    </div>
+
+    <!-- added this div to show where the game screen ends-->
+    
+    <form id="end">
+        <h2>End Screen</h2>
+        <label for="initials">Initials:</label>
+        <input type="text" id="initials"/>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- linked the javascript to the html so when you pull up the website it gives you the features i have put in JS -->
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+
 </html>
