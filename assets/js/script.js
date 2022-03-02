@@ -1,8 +1,8 @@
 //created varibles that are linked with the html
 var startEl = document.querySelector('#start');
-var quiz = document.getElementById('quiz')
-var results = document.getElementById('results')
-var submitbBtn = document.getElementById('submit')
+var quiz = document.getElementById('#quiz')
+var results = document.getElementById('#results')
+var submitbBtn = document.getElementById('#submit')
 //created functions so the quiz will work
 
 
