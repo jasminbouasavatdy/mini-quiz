@@ -63,27 +63,5 @@ function questions() {
         },
     ]
 };
-// myQuestions.forEach(function (currentQuestion, questionNumber) {
-//         var answers = {}
-//         for (letter in currentQuestion.answers) {
-//             answers.push(
-//                 `<label>
-//             <input type="radio" name="question${questionNumber}" value="${letter}">
-//             ${letter} :
-//             ${currentQuestion.answers[letter]}
-//             </label>`
-//             )
-//         }
 
-//     })
-//     questions()
-//     function showResults() {
-//         var answers = quiz.querySelectorAll('.answers');
-//         let numCorrect = 0;
-//         myQuestions.forEach(function (currentQuestion, questionNumber) {
-//             var answer = answer(questionNumber);
-//             })
-//     }
-//     quiz.innerHTML = output.join('');
-        // added an event listener so when you are finished with the results on click to submitthe buttom will respond accordingly
-        submitbBtn.addEventListener('click', showResults);
+submitbBtn.addEventListener('click', showResults);
