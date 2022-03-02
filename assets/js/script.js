@@ -22,7 +22,7 @@ function questions() {
             correctAnswer: "e"
         },
         {
-            question: "When evaluating an expression what does || mean",
+            question: "When evaluating an expression what does || mean",         
             answers: {
                 a: "And",
                 b: "False",
