@@ -72,6 +72,7 @@ function questionScreen() {
     }, 1000);
 }
 
+
 function loadQuestion() {
     var question = questions[position];
     questionsEl.innerHTML = '';
