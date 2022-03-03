@@ -111,11 +111,18 @@ function handleSubmit(event) {
     var stored = JSON.parse(localStorage.getItem('highScores')) || [];
     var updatedScores = stored.concat({
         //in local storage you will see time remaining in seconds which is your score
-        score: `${seconds} second`,
+        score: `${seconds} score`,
         initials: initialsInput.value
     });
 
     localStorage.setItem('highScores', JSON.stringify(updatedScores));
+    for( var i = 0; i < updatedScores.length; i++){
+        var scoreItem = updatedScores[i];
+        console.log(scoreItem);
+        var pEl = document.createElement('p');
+        pEl.textContent = scoreItem.initials +': '+ scoreItem.score
+        endEl.append(pEl);
+    }
 }
 
 function init() {
