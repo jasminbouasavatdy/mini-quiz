@@ -1,141 +1,121 @@
 var startEl = document.querySelector('#start');
-var gameEl = document.getElementById('#game');
-var endEl = document.getElementById('#done');
-var questionsEl = document.getElementById('#questions');
-
+var gameEl = document.querySelector('#game');
+var endEl = document.querySelector('#end');
+var questionsEl = document.querySelector('#questions');
+var titleEl = document.querySelector('#title')
 var beginBtn = document.querySelector('#begin');
 var initialsInput = document.querySelector('#initials');
 
-// var submitbBtn = document.getElementById('#submit')
-// created this varible to know where the starting point is on the game
-var postion = 0;
-var scorw = 100
+var position = 0; //index postion of whatever page you are on
+var score = 100;
 
-//created an array of obejects for my questions so the quiz will work
+
 var questions = [
-    {
-        text: "What are the primitive data types?",
-        possible: [
-            "Undefined",
-            "String",
-            "Numbers",
-            "Boolean",
-            "All of the above",
-        ],
-        correctAnswer: 5
-    },
-    {
-        text: "When evaluating an expression what does || mean",
-        possible: [
-            "And",
-            "False",
-            "True",
-            "Or",
-        ],
-        correctAnswer: 4
-    },
-    {
-        text: "To store groups of data in an array what syntax do we use?",
-        possible: [
-            "Parenthesis",
-            "Double Quotes",
-            "Brackets",
-            "Single Quotes",
-        ],
-        correctAnswer: 3
-    },
-    {
-        text: "What are functions?",
-        possible: [
-            "Functionable functions",
-            "False",
-            "Resusable blocks of code",
-            "None of the above",
-        ],
-        correctAnswer: 3
-    },
-    {
-        text: "What does the (!) do to an expression?",
-        possible: [
-            "Nothing just a warning",
-            "Turns the expression false",
-            "Turns the expression to true",
-            "Turns the expression to true or false and vice versa",
-        ],
-        correctAnswer: 4
-    },
+  {
+    text: ['How much wood could a woodchuck chuck?'],
+    possible: [ 'Answer 23','Answer 2','Answer 3', 'Answer 4'],
+    correct: 'Answer 4',
+  },
+  {
+    text: ['meats or poatoes'],
+    possible: [ 'Answer 24','Answer 2','Answer 3', 'Answer 4'],
+    correct: 'Answer 4',
+  },
+  {
+    text: ['chicken or steak?'],
+    possible: [ 'Answer 25','Answer 2','Answer 3', 'Answer 4'],
+    correct: 'Answer 4',
+  },
+  {
+    text: ['cheese or queso'],
+    possible: [ 'Answer 25','Answer 2','Answer 3', 'Answer 4'],
+    correct: 'Answer 4',
+  },
+  {
+    text: ['dogs or cats'],
+    possible: [ 'Answer 25','Answer 2','Answer 3', 'Answer 4'],
+    correct: 'Answer 4',
+  },
 ];
 
-// instructor provided
+var currentQuestion = 0;
+
+//instructor provided
 function startingScreen() {
-    startEl.style.display = "block";
-    gameEl.style.display = "none";
-    doneEl.style.display = "none";
+  startEl.style.display = 'block';
+  gameEl.style.display = 'none';
+  endEl.style.display = 'none';
 }
-// instructor provided
-function gameingScreen() {
-    startEl.style.display = "none";
-    gameEl.style.display = "block";
-    doneEl.style.display = "none";
-    renderQuestion();
+//instructor provied
+function questionScreen() {
+  startEl.style.display = 'none';
+  gameEl.style.display = 'block';
+  endEl.style.display = 'none';
+  renderQuestion();
 }
-// showing the starting point of the first question
+
 function renderQuestion() {
-    var myQuestions = myQuestions[position];
-
-    for (var i = 0; i < question.possible.length; i++) {
-        var item = question.possible[i];
-        var answerBtn = document.createElement('button');
-        answerBtn.textContent = i + 1 + ". " + item;
-        gameEl.appendChild(answerBtn);
-    }
+  var question = questions[position];
+ questionsEl.innerHTML = '';
+ titleEl.textContent = question.text;
+  for (var i = 0; i < question.possible.length; i++) {
+    var item = question.possible[i];
+    var answerBtn = document.createElement('button');
+    answerBtn.textContent = i + 1 + '. ' + item;
+    questionsEl.appendChild(answerBtn);
+  }
 }
-// instructor provided
-function endingScreen() {
-    startEl.style.display = "none";
-    gameEl.style.display = "none";
-    doneEl.style.display = "block";
+//instructor provided
+function endGame() {
+  startEl.style.display = 'none';
+  gameEl.style.display = 'none';
+  endEl.style.display = 'block';
 }
+//this is so you can save the scores in local storage..DO NOT COPY COMPlETELY.
+function handleInitialSubmit(event) { 
+  event.preventDefault();
 
-function handleingSubmit(event) {
-    event.preventDefault();
+  var stored = JSON.parse(localStorage.getItem('highScores')) || [];
+  var updatedScores = stored.concat({ 
+    score: score,
+    initials: initialsInput.value
+  });
 
-    var stored = JSON.parse(localStorage.getItem('highScores')) || [];
-    var updatedScores = stored.push({
-        score: score,
-        initials: initialsInput.value
-    });
-
-    localStorage.setItem('highScores', JSON.stringify(updatedScores)); //before it goes to local storage you put it in "stirngify"
+  localStorage.setItem('highScores', JSON.stringify(updatedScores));
 }
 
 function init() {
-    startScreen();
-}
-//   instructor provided
-function handleAnswerClick(event) {
-    if (event.target.matches('button')) { //checking to see if youre clicking a button on the screen
-        console.log(event.target);
-        postion++;
-        if (postion < questions.length) {
-            renderQuestion();
-        } else {
-            endScreen();
-        }
-    }
+  startingScreen();
 }
 
-beginBtn.addEventListener('click', gameScreen);
-gameEl.addEventListener('click', function (event) {
-    if (event.target.matches('button')) { //checking to see if youre clicking a button on the screen
-        console.log(event.target);
-        cursor++;
-        if (cursor < questions.length) {
-            renderQuestion();
-        } else {
-            endScreen();
-        }
+function handleAnswerClick(event) {
+  if (event.target.matches('button')) { 
+    console.log(event.target);
+    position++;
+    if (position < questions.length) {
+      renderQuestion();
+    } else {
+      endGame();
     }
+  }
+}
+
+beginBtn.addEventListener('click', questionScreen);
+gameEl.addEventListener('click', function (event) {
+  if (event.target.matches('button')) { 
+    console.log(event.target);
+    position++;
+    if (position < questions.length) {
+      renderQuestion();
+    } else {
+      endGame();
+    }
+  }
 });
-doneEl.addEventListener('submit', handleInitialSubmit);
+endEl.addEventListener('submit',handleInitialSubmit);
 init();
+
+//how to adjust score
+//how to do the points for score
+//how to add a timer that subtracts time
+// how to determine if your answer is wronf or right

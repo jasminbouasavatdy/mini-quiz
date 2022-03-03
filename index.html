@@ -5,39 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- linkes the stye sheet incase I wanted to some nice styling -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Mini Quiz</title>
+    <title>Quiz</title>
 </head>
 
 <body>
-    <!-- created divs to separate between starting point, the actual game and when the game ends -->
-    <h1>Are you smarter than a Web Developer?</h1>
 
-    <!-- added a start button to start the game -->
+    <h1 >Are you smarter than a Web Developer?</h1>
     <div id="start">
-    <h2>Click to start</h2>
-    <button id="begin">Start</button>
+        <h2>Start</h2>
+        <button id="begin">Start</button>
     </div>
 
-    <!-- added a div to have the game loaded in -->
     <div id="game">
-        <h2>Game</h2>
+        <h2 id="title">Game</h2>
         <div id="questions"></div>
 
     </div>
 
-    <!-- added this div to show where the game screen ends-->
-    
     <form id="end">
         <h2>End Screen</h2>
         <label for="initials">Initials:</label>
         <input type="text" id="initials"/>
         <button type="submit">Submit</button>
     </form>
-
-    <!-- linked the javascript to the html so when you pull up the website it gives you the features i have put in JS -->
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    
+<script src="./assets/js/script.js"></script>
 </body>
 
 </html>
