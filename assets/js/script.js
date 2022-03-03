@@ -3,11 +3,12 @@ var gameEl = document.querySelector('#game');
 var endEl = document.querySelector('#end');
 var questionsEl = document.querySelector('#questions');
 var titleEl = document.querySelector('#title')
-
+var isEndGame = false;
 
 var beginBtn = document.querySelector('#begin');
 var initialsInput = document.querySelector('#initials');
-
+// declared the variable timer
+var timer;
 
 var timeEl = document.querySelector('.time')
 var mainEl = document.querySelector('.main')
@@ -43,36 +44,33 @@ var questions = [
     },
 ];
 
-// var secondsLeft = 160;
-// timeEl.textContent = seconds;
-// var timer = setInterval(function (){
-    //     seconds --;
-    //     timeEl.textContent = questions.text;
-    // })
-    
-    // //instructor provided
-    function startingScreen() {
-        startEl.style.display = 'block';
-        gameEl.style.display = 'none';
-        endEl.style.display = 'none';
+
+// //instructor provided
+function startingScreen() {
+    startEl.style.display = 'block';
+    gameEl.style.display = 'none';
+    endEl.style.display = 'none';
 }
 //instructor provied
 function questionScreen() {
+    console.log('question screen');
     startEl.style.display = 'none';
     gameEl.style.display = 'block';
     endEl.style.display = 'none';
-    renderQuestion();
+    loadQuestion();
     timeEl.textContent = seconds;
-    var timer = setInterval(function () {
+    //initialized the var timer
+    timer = setInterval(function () {
         seconds--;
         timeEl.textContent = seconds;
+        // if timer gets to 0 the timer will stop
         if (seconds < 0) {
-            clearInterval(timer)
+            clearInterval(timer);
         }
     }, 1000);
 }
 
-function renderQuestion() {
+function loadQuestion() {
     var question = questions[position];
     questionsEl.innerHTML = '';
     titleEl.textContent = question.text;
@@ -83,11 +81,30 @@ function renderQuestion() {
         questionsEl.appendChild(answerBtn);
     }
 }
+function checkAnswer(choice) {
+    //check if they got the right answer
+    var correctAnswer = quizQuestions[questionIndex].correct
+    if (choice !== correctAnswer) {
+        // tell them it's wrong
+        rightOrWrong.textContent = 'WRONG!';
+        // subtract 10 sec from timer
+        secondsLeft = Math.max(secondsLeft - 15, 0);
+    }
+    else {
+        // correct answer!
+        rightOrWrong.textContent = 'CORRECT!';
+    }
+    resultDiv.style.display = "block";
+}
 //instructor provided
 function endGame() {
+    console.log("end game");
     startEl.style.display = 'none';
     gameEl.style.display = 'none';
     endEl.style.display = 'block';
+    // when end game the timer will stop
+    clearInterval(timer);
+
 }
 //this is so you can save the scores in local storage..DO NOT COPY COMPlETELY.
 function handleInitialSubmit(event) {
@@ -111,7 +128,7 @@ function handleAnswerClick(event) {
         console.log(event.target);
         position++;
         if (position < questions.length) {
-            renderQuestion();
+            loadQuestion();
         } else {
             endGame();
         }
@@ -124,7 +141,7 @@ gameEl.addEventListener('click', function (event) {
         console.log(event.target);
         position++;
         if (position < questions.length) {
-            renderQuestion();
+            loadQuestion();
         } else {
             endGame();
         }
